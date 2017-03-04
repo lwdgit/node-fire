@@ -1,6 +1,6 @@
 {
   "name": "node-fire",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library for automatically generating command line CLIs from any nodejs project.",
   "bin": {
     "fire": "./bin/index.js"

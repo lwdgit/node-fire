@@ -1,9 +1,11 @@
 const requireg = require('./requireg/index');
+const { existsSync } = require('fs');
 const {
-    resolve,
     extname,
     join
 } = require('path');
+const resolve = require('resolve').sync;
+const cwd = process.cwd();
 
 const PKG_PREFIX = '';
 
@@ -13,11 +15,12 @@ exports.isObject = function(obj) {
 
 exports.patternRequire = function patternRequire(filepath = '.') {
     filepath = String(filepath);
-    let fullpath = filepath;
-    if (/^[\.\\\/]/.test(filepath)) {
+    let fullpath = resolve(filepath, { basedir: cwd });
+    
+    if (/^[\.\\\/]/.test(filepath) && existsSync(fullpath)) {
         return fullpath;
     } else if (!(fullpath = requireg.resolve(PKG_PREFIX + filepath))) {
-        return resolve(filepath);
+        return;
     }
     return fullpath;
 }

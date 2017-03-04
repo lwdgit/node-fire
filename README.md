@@ -4,5 +4,14 @@
 
 ## install
 
-> npm install -g node-fire
-> fire ./test.js
+```
+$ npm install -g node-fire
+```
+
+## How to use
+```
+$ fire ./test.js
+```
+
+## LICENSE
+Released under MIT license

@@ -30,10 +30,14 @@ module.exports = function (...argv) {
 
     debug(' > loopup script:', script);
     script = patternRequire(script);
+
     if (script == null) {
-        console.error('Not find a valid js file');
+        console.error('Not find a valid js/json file');
         return;
     }
+
+    debug(`> RUN ${script}\n`);
+
     debug(' > ha, got it', script);
 
     let fn = require(script);
