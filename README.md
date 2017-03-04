@@ -15,7 +15,8 @@ $ fire ./test.js arg1 arg2
 
 ## Examples
 
-```test.js
+```
+//test.js
 module.exports = function(arg1, arg2, opts) {
     console.log(arg1, Array.isArray(arg1));
     console.log(arg2);
@@ -38,7 +39,8 @@ done
 ```
 
 One more:
-```calc.js
+```
+//calc.js
 exports.add = function(a, b, opts) {
     return a + b;
 }
