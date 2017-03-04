@@ -1,11 +1,9 @@
+#!/usr/bin/env node
 
 const debug = require('debug')('node-fire:bin');
 const join = require('path').join;
-
-
 const parseArgs = require('../libs/parse-args');
 const pkg = require(join(__dirname, '../package.json'));
-
 
 const start = function () {
     let {argv, opts} = parseArgs();
