@@ -5,8 +5,8 @@ test('exec', (t) => {
     t.pass();
 });
 
-test('path autocomplete', (t) => {
-    exec('./test/fixtures/test');
+test('relative path', (t) => {
+    exec('test/fixtures/test.js');
     t.pass();
 });
 
