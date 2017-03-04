@@ -8,10 +8,9 @@ const parseArgs = require('./libs/parse-args');
 
 fire.wrap = function(fn) {
     return function(args) {
-        let {argv, opts} = parseArgs(args);
-        opts['_'] = opts['_'].slice(1);
+        let argv = parseArgs(args);
         argv = argv.slice(2);
-        return wrap(fn).apply(opts, argv);
+        return wrap(fn)(...argv);
     }
 }
 

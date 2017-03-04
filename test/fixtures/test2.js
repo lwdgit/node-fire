@@ -10,10 +10,10 @@ exports.c = function(input) {
     console.log(input);
 }
 
-exports.d = function(opts= {}) {
-    console.log(opts.input);
+exports.d = function() {
+    console.log(this.input);
 }
 
-exports.e = function(input, opts = {}) {
-    console.log(input, opts.input);
+exports.e = function(input) {
+    console.log(input, this.input);
 }

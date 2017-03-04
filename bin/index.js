@@ -6,9 +6,9 @@ const parseArgs = require('../libs/parse-args');
 const pkg = require(join(__dirname, '../package.json'));
 
 const start = function () {
-    let {argv, opts} = parseArgs();
+    let argv = parseArgs();
     debug('args', argv);
-    return require('../index.js').apply(opts, argv);
+    return require('../index.js')(...argv);
 }
 
 const ret = start();

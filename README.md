@@ -18,11 +18,11 @@ $ fire ./test.js arg1 arg2
 ### Global Mode
 ```
 //test.js
-module.exports = function(arg1, arg2, opts) {
+module.exports = function(arg1, arg2) {
     console.log(arg1, Array.isArray(arg1));
     console.log(arg2);
-    console.log(opts.arg3);
-    console.log(opts.arg4);
+    console.log(this.arg3);
+    console.log(this.arg4);
     return 'done';
 }
 ```
@@ -42,19 +42,19 @@ done
 One more:
 ```
 //calc.js
-exports.add = function(a, b, opts) {
+exports.add = function(a, b) {
     return a + b;
 }
 
-exports.multiply = function*(a, b, opts) {
+exports.multiply = function*(a, b) {
     return a * b;
 }
 
 exports.pow = function(a) {
     return a * a;
 }
-exports.div = function(a, b, opts) {
-    b = b || opts.b;
+exports.div = function(a, b) {
+    b = b || this.b;
     return a / b;
 }
 ```
@@ -70,7 +70,7 @@ fire examples/calc.js div 8 0 --b=2   //4
 ```
 //wrap.js
 const { wrap } = require('node-fire');
-const calc = function(a, b, opts) {
+const calc = function(a, b) {
     return a + b;
 }
 

@@ -1,15 +1,15 @@
-exports.add = function(a, b, opts) {
+exports.add = function(a, b) {
     return a + b;
 }
 
-exports.multiply = function*(a = 0, b = 0, opts) {
+exports.multiply = function*(a = 0, b = 0) {
     return a * b;
 }
 
 exports.pow = function(a = 0) {
     return a * a;
 }
-exports.div = function(a, b, opts) {
-    b = b || opts.b;
+exports.div = function(a, b) {
+    b = b || this.b;
     return a / b;
 }

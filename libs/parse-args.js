@@ -37,10 +37,5 @@ module.exports = function(args) {
     } else {
         argv = parseArgs(Argv);  
     }
-    if (argv == null) return;
-    let opts = argv[argv.length - 1];
-    return {
-        argv,
-        opts
-    };
+    return argv; 
 };
