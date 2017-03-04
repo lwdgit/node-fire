@@ -15,6 +15,7 @@ $ fire ./test.js arg1 arg2
 
 ## Examples
 
+### Global Mode
 ```
 //test.js
 module.exports = function(arg1, arg2, opts) {
@@ -65,5 +66,23 @@ fire ./calc.js pow 3                  //9
 fire examples/calc.js div 8 0 --b=2   //4         
 ```
 
+### Local mode
+```
+//wrap.js
+const { wrap } = require('node-fire');
+const calc = function(a, b, opts) {
+    return a + b;
+}
+
+wrap(calc)(process.argv)
+.then(function (ret) {
+    console.log(ret);
+});
+```
+
+```
+node ./wrap.js 3 4
+```
+
 ## LICENSE
-Released under MIT license
+Under MIT license

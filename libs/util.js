@@ -26,12 +26,15 @@ exports.patternRequire = function patternRequire(filepath = '.') {
     return fullpath;
 }
 
-exports.getFuncLength = function getFuncLength(fn) {
+const parseFunc = exports.parseFunc = function(fn) {
     if (/function[^(]*\(([^)]+)/m.test(fn.toString())) {
-        return RegExp.$1.split(',').length;
+        return RegExp.$1;
     } else {
-        return fn.length || 1;
+        return '';
     }
+}
+exports.getFuncLength = function getFuncLength(fn) {
+    return parseFunc(fn).split(',').length || 1;
 }
 
 exports.isEmpty = function isEmpty(obj) {
