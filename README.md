@@ -30,7 +30,7 @@ $ npm install mathjs -g
 $ fire mathjs add 5.1 5.2
 ```
 
-3. [node-open](https://github.com/josdejong/mathjs)
+3. [node-open](https://github.com/pwnall/node-open)
 ```
 $ npm install open -g
 $ fire open index.html
