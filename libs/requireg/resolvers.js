@@ -9,6 +9,7 @@ var isWin32 = process.platform === 'win32'
 // resolvers
 exports.resolvers = {
     nativeResolve,
+    currentPathResolve,
     nodePathResolve,
     userHomeResolve,
     nodeModulesResolve,
@@ -31,6 +32,25 @@ function nativeResolve(module, dirname) {
     try {
         return require.resolve(module, dirname)
     } catch (e) {}
+}
+
+function currentPathResolve(module) {
+    var i, l, modulePath
+    var cwd = process.cwd()
+
+    var paths = [
+        'node_modules',
+        'node_libraries',
+        'node_packages'
+    ]
+
+    for (i = 0, l = paths.length; i < l; i += 1) {
+        if (modulePath = resolveFn(module, cwd, paths[i])) {
+            break;
+        }
+    }
+
+    return modulePath
 }
 
 // See: http://nodejs.org/docs/latest/api/modules.html#modules_loading_from_the_global_folders

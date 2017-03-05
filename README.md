@@ -20,7 +20,7 @@ $ fire ./test.js arg1 arg2
 1. [shelljs](https://github.com/shelljs/shelljs)
 
     ```
-    $ npm install shelljs -g
+    $ npm install shelljs
     $ fire shelljs touch 1.txt
     $ fire shelljs rm 1.txt
     ```
@@ -28,14 +28,14 @@ $ fire ./test.js arg1 arg2
 2. [mathjs](https://github.com/josdejong/mathjs)
 
     ```
-    $ npm install mathjs -g
+    $ npm install mathjs
     $ fire mathjs add 5.1 5.2
     ```
 
 3. [node-open](https://github.com/josdejong/mathjs)
 
     ```
-    $ npm install open -g
+    $ npm install open
     $ fire open index.html
     $ fire open http://127.0.0.1
     ```
@@ -49,14 +49,15 @@ $ fire ./test.js arg1 arg2
 {
   "scripts": {
     "open": "fire open http://127.0.0.1",
-    "copy": "fire shelljs cp 1.txt 2.txt",
+    "copy": "fire shelljs cp package.json package.json2",
+    "combo": "fire mathjs random 0 100 | xargs fire shelljs touch ",
     "math": "fire mathjs add 42423.321 32132"
   },
   "devDependencies": {
     "mathjs": "^3.9.3",
     "open": "^0.0.5",
     "shelljs": "^0.7.6",
-    "node-fire": "^0.1.2"
+    "node-fire": "latest"
   }
 }
 ```
@@ -68,14 +69,15 @@ cat << EOF > package.json
 {
   "scripts": {
     "open": "fire open http://127.0.0.1",
-    "copy": "fire shelljs cp 1.txt 2.txt",
+    "copy": "fire shelljs cp package.json package.json2",
+    "combo": "fire mathjs random 0 100 | xargs fire shelljs touch ",
     "math": "fire mathjs add 42423.321 32132"
   },
   "devDependencies": {
     "mathjs": "^3.9.3",
     "open": "^0.0.5",
     "shelljs": "^0.7.6",
-    "node-fire": "^0.1.2"
+    "node-fire": "latest"
   }
 }
 EOF
@@ -83,6 +85,7 @@ EOF
 npm install
 npm run math
 npm run copy
+npm run combo
 npm run open
 
 ```
