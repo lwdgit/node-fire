@@ -1,75 +1,88 @@
 const debug = require('debug')('wrap');
 const co = require('co');
+const log = require('./log');
 
 const {
-    isObject,
     isEmpty,
     getFuncLength,
-    parseFunc
 } = require('./util');
 
-const { concat, slice } = require('./array');
+const { slice } = require('./array');
 
+function* getFunction (fn, args, opts) {
+    log(typeof fn, args);
 
-function error(...args) {
-    return Promise.reject(args.join(' '));
-}
-
-function parseInputs(fn, args) {
     if (typeof fn !== 'function') {
         if (isEmpty(fn)) {
             //may be a script empty or not have any exports
             debug('object can\'t be expand any more');
             return;
-        } else if (isObject(fn)) {
-            let subFnName;
-            if ((subFnName = args[0]) in fn) {
+        }
+        
+        if (typeof fn === 'object' && args.length) {
+            let subFnName = args[0];
+            slice(args, 1);
+            log(subFnName);
+            if (subFnName === undefined) return;
+            if (subFnName in fn) {
+                log(subFnName, fn);
                 fn = fn[subFnName];
-                slice(args, 1);
-                debug('object', fn);
-                debug('args', args);
+                log('object', fn);
+                log('args', args);
                 if (typeof fn !== 'function') {
                     return fn;
                 }
             } else {
-                return error('Not exists a object named', subFnName);
+                return;
             }
+        } else {
+            return fn;
         }
     }
-    return execute(fn, args);
+    log(typeof fn, args);
+    return yield execute(fn, args, opts);
 }
 
-function execute(fn, args) {
+function* execute(fn, args, opts) {
     let fnLen = getFuncLength(fn);
+    if (typeof fn !== 'function') return (yield [fn])[0];
+
+    let wrap = co.wrap(fn);
+    log('fn', typeof fn, args[0]);
 
     //if input arguments long than accept arguments
     debug('func.length', fnLen, args.length);
 
-    if (args.length < fnLen) {
-        concat(args, new Array(fnLen - args.length - 1));
+    if (/^\.{3}(.+)$/m.test(args[0])) {
+        let tmpArg = RegExp.$1.split(',');
+        args.splice(0, 1, ...tmpArg);
+        fnLen = tmpArg.length;
     }
 
-    let wrap = co.wrap(fn);
+    // if (args.length < fnLen) {
+    //     concat(args, new Array(fnLen - args.length));
+    // }
 
-    debug('fn', fn);
-    debug('wrap', wrap);
-    debug('args', args);
-    if (typeof wrap !== 'function') return wrap;
-    let ret = wrap.apply(args.slice(-1)[0], args.slice(0, args.length - 1));
+    log('args', args);
+
+    log(args.slice(0, fnLen));
+    let ret = wrap.apply(opts, args.slice(0, fnLen));
     slice(args, fnLen);
+    log(fnLen, ret);
     return ret;
 }
 
-module.exports = function (fn, script = '') {
-    return function (...args) {
-        debug('input', args);
-        return co(function* () {
+module.exports = function (fn) {
+    return function (argv) {
+        let args = argv._;
+        log('input', argv);
+        return co(function* gen() {
             do {
-                fn = (yield [parseInputs(fn, args)])[0];
-            } while(args.length > 1 && typeof fn !== 'undefined');
+                fn = yield getFunction(fn, args, argv);
+            } while(args.length > 0 && typeof fn !== 'undefined');
             return fn;
         }).catch(function(e) {
-            debug('Error: ', e);
+            console.log('Error: ', e);
             return fn;
         });
     }

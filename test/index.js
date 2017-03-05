@@ -28,5 +28,6 @@ test('test2 with second param', (t) => {
 });
 
 test('deep get', t=> {
-    t.is(exec('./test/fixtures/deep.js b d'), '4');
+    t.is(exec('./test/fixtures/deep.js b d'), 'delay deep');
+    t.pass();
 });

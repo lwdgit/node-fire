@@ -1,10 +1,11 @@
 const test = require('ava');
 const exec = require('./_exec');
 test('run shelljs', (t) => {
-    let filename = 'testfile' + Date.now();
-    exec('shelljs touch ' + filename);
+    let filename = '0000testfile' + Date.now();
+    exec('shelljs touch ...' + filename);
     t.regex(exec('shelljs ls'), new RegExp(filename));
-    exec('shelljs rm ' + filename);
+    t.is(exec('shelljs ls ..../ 0'), filename);
+    exec('shelljs rm ...' + filename);
     t.pass();
 });
 

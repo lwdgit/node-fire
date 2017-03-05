@@ -5,29 +5,21 @@ const Argv = yargs
     .describe('verbose', "Show more info when excute a script")
     .argv;
 
+const indexOf = String.prototype.indexOf;
 
 let sperator = ',';
 const parseArgs = function (argv) {
     sperator = String(argv.separator || ',');
     let normalArgs = [];
-    if (!argv._.length) normalArgs.push(undefined); //第一个参数只能为字符串
     for (let arg of argv._) {
-        if (~String.prototype.indexOf.call(arg, sperator)) {
-            normalArgs.push(arg.toString().split(sperator).map((i) => i.trim()));
+        if (~indexOf.call(arg, sperator)) {
+            normalArgs.push(arg.toString().split(sperator).map(i => i.trim()));
         } else {
             normalArgs.push(arg);
         }
     }
-    normalArgs.push(argv);
-    if (argv.verbose) {
-        process.env['DEBUG'] = argv.verbose == 'true' ? '*' : argv.verbose;
-    }
-
-    if (argv.version) {
-        console.log(`\n${pkg.name} version: ${pkg.version}\n`.yellow);
-        return;
-    }
-    return normalArgs;
+    argv._ = normalArgs;
+    return argv;
 };
 
 module.exports = function(args) {

@@ -21,8 +21,12 @@ $ fire ./test.js arg1 arg2
 
     ```
     $ npm install shelljs
-    $ fire shelljs touch 1.txt
-    $ fire shelljs rm 1.txt
+    $ fire shelljs ls        //return ls object
+    $ fire shelljs ls stdout  //return ls output
+    $ fire shelljs ls 0     //return first line
+    $ fire shelljs touch ...1.txt,2.txt
+    $ fire shelljs rm ...1.txt
+    $ fire shelljs cp ...-R,test,test1
     ```
 
 2. [mathjs](https://github.com/josdejong/mathjs)
@@ -64,14 +68,15 @@ $ fire ./test.js arg1 arg2
 quick test:
 
 ```
-mkdir test && cd test
+mkdir quick_test && cd quick_test
 cat << EOF > package.json
 {
   "scripts": {
     "open": "fire open http://127.0.0.1",
-    "copy": "fire shelljs cp package.json package.json2",
+    "copy": "fire shelljs cp ...package.json,package.json2",
     "combo": "fire mathjs random 0 100 | xargs touch ",
-    "math": "fire mathjs add 42423.321 32132"
+    "math": "fire mathjs add 42423.321 32132",
+    "ls": "fire shelljs ls stdout"
   },
   "devDependencies": {
     "mathjs": "^3.9.3",

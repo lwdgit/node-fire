@@ -4,26 +4,22 @@ const {
 } = require('path');
 
 const {
-    isObject,
-    isEmpty,
     patternRequire,
-    getFuncLength
 } = require('./util');
 const wrap = require('./wrap');
 
 const debug = require('debug')('node-fire');
 
-module.exports = function (...argv) {
+module.exports = function (argv) {
     debug('input args', argv);
     try {
         this.package = require(join(this.cwd, 'package.json'))
     } catch (e) {}
 
-    let script = argv[0],
-        args = argv.slice(1);
+    let script = argv._.shift();
 
     if (!script) {
-        console.error(`Not find script ${argv[0]}`);
+        console.log(`Nothing to do! Please type "fire --help" view more info!`.yellow);
         return;
     }
 
@@ -41,5 +37,5 @@ module.exports = function (...argv) {
 
     let fn = require(script);
     fn = wrap(fn);
-    return fn(...args);
+    return fn(argv);
 }
