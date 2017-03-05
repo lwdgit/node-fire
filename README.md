@@ -32,7 +32,7 @@ $ fire ./test.js arg1 arg2
     $ fire mathjs add 5.1 5.2
     ```
 
-3. [node-open](https://github.com/josdejong/mathjs)
+3. [node-open](https://github.com/pwnall/node-open)
 
     ```
     $ npm install open
