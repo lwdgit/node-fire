@@ -2,7 +2,6 @@ let fire = require('./libs/index');
 
 const colors = require('colors');
 global.Promise = require('bluebird'); //replace default promise for debug
-require('shelljs/global'); //for convient
 const wrap = require('./libs/wrap');
 const parseArgs = require('./libs/parse-args');
 

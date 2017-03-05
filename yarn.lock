@@ -1928,6 +1928,10 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+open@^0.0.5:
+  version "0.0.5"
+  resolved "http://registry.npm.taobao.org/open/download/open-0.0.5.tgz#42c3e18ec95466b6bf0dc42f3a2945c3f0cad8fc"
+
 option-chain@^0.1.0:
   version "0.1.1"
   resolved "http://registry.npm.taobao.org/option-chain/download/option-chain-0.1.1.tgz#e9b811e006f1c0f54802f28295bfc8970f8dcfbd"
