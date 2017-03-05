@@ -50,7 +50,7 @@ $ fire ./test.js arg1 arg2
   "scripts": {
     "open": "fire open http://127.0.0.1",
     "copy": "fire shelljs cp package.json package.json2",
-    "combo": "fire mathjs random 0 100 | xargs fire shelljs touch ",
+    "combo": "fire mathjs random 0 100 | xargs touch ",
     "math": "fire mathjs add 42423.321 32132"
   },
   "devDependencies": {
@@ -70,7 +70,7 @@ cat << EOF > package.json
   "scripts": {
     "open": "fire open http://127.0.0.1",
     "copy": "fire shelljs cp package.json package.json2",
-    "combo": "fire mathjs random 0 100 | xargs fire shelljs touch ",
+    "combo": "fire mathjs random 0 100 | xargs touch ",
     "math": "fire mathjs add 42423.321 32132"
   },
   "devDependencies": {
