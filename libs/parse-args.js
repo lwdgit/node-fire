@@ -1,8 +1,11 @@
 const yargs = require('yargs');
 const Argv = yargs
+    .command(['<any script> [..., arguments]'], 'run a js file or node_modules.', {})
     .help('help')
     .describe('separator', 'Sets the separator to commit array params, default is , ')
+    .describe('silent', 'Close output')
     .describe('verbose', "Show more info when excute a script")
+    .demandCommand(1, 'More infomation please visit https://github.com/lwdgit/node-fire')
     .argv;
 
 const indexOf = String.prototype.indexOf;

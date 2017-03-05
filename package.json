@@ -1,6 +1,6 @@
 {
   "name": "node-fire",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Run a js object or a function by command line directly.",
   "bin": {
     "fire": "./bin/index.js"
@@ -31,6 +31,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lwdgit/node-fire.git"
+  },
+  "engines": {
+    "node": ">=6"
   },
   "keywords": [
     "node-fire"
