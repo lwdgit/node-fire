@@ -1,6 +1,6 @@
 {
   "name": "node-fire",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Run a js object or a function by command line directly.",
   "bin": {
     "fire": "./bin/index.js"

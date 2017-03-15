@@ -1,6 +1,7 @@
 const debug = require('debug')('wrap');
 const co = require('co');
 const log = require('./log');
+const parse = require('yargs').parse;
 
 const {
     isEmpty,
@@ -54,7 +55,7 @@ function* execute(fn, args, opts) {
     debug('func.length', fnLen, args.length);
 
     if (/^\.{3}(.+)$/m.test(args[0])) {
-        let tmpArg = RegExp.$1.split(',');
+        let tmpArg = parse(RegExp.$1.split(','))._;
         args.splice(0, 1, ...tmpArg);
         fnLen = tmpArg.length;
     }
