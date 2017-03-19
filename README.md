@@ -1,6 +1,6 @@
 # node-fire
 
-> Run a js object or a function by command line directly.
+> Run a js object, Promise, Generator or a function by command line directly.
 
 ## Install
 
@@ -12,39 +12,98 @@ $ npm install -g node-fire
 ```
 $ fire ./test.js arg1 arg2
 ```
+### Fire third party node_modules
 
-## Examples
+[Example](./examples.md)
 
-### With third party node-modules 
+### As a cli
+```
+//test.js
+module.exports = function(arg1, arg2) {
+    console.log(arg1, Array.isArray(arg1));
+    console.log(arg2);
+    console.log(this.arg3);
+    console.log(this.arg4);
+    return 'done';
+}
+```
+RUN
+```
+fire ./test.js "1,2,3,4" hello --arg3 world --arg4 "the end"
+```
+Output:
 
-1. [shelljs](https://github.com/shelljs/shelljs)
+```
+[ '1', '2', '3', '4' ] true
+hello
+world
+the end
+done
+```
 
-    ```
-    $ npm install shelljs
-    $ fire shelljs ls        //return ls object
-    $ fire shelljs ls stdout  //return ls output
-    $ fire shelljs ls 0     //return first line
-    $ fire shelljs touch ...1.txt,2.txt
-    $ fire shelljs rm ...1.txt
-    $ fire shelljs cp ...-R,test,test1
-    ```
+Test2
 
-2. [mathjs](https://github.com/josdejong/mathjs)
+```javascript
+//test2.js
+module.exports = function (a, opts, c) {
+  return `${a} ${opts.name}${c}`
+}
+```
+RUN
+```
+fire ./test2.js hello name=world !
+```
+Output:
 
-    ```
-    $ npm install mathjs
-    $ fire mathjs add 5.1 5.2
-    ```
+```
+hello world!
+```
 
-3. [node-open](https://github.com/pwnall/node-open)
+One more:
 
-    ```
-    $ npm install open
-    $ fire open index.html
-    $ fire open http://127.0.0.1
-    ```
+```
+//calc.js
+exports.add = function(a, b) {
+    return a + b;
+}
 
-> TIPs: node-fire not wrap these modules(just a function runner), so you should install these modules manualy.
+exports.multiply = function*(a, b) {
+    return a * b;
+}
+
+exports.pow = function(a) {
+    return a * a;
+}
+exports.div = function(a, b) {
+    b = b || this.b;
+    return a / b;
+}
+```
+RUN
+```
+fire ./calc.js add 3 4                // 7
+fire ./calc.js multiply 3 4           // 12
+fire ./calc.js pow 3                  //9
+fire examples/calc.js div 8 0 --b=2   //4         
+```
+
+### As a wrapper
+```
+//wrap.js
+const { wrap } = require('node-fire');
+const calc = function(a, b) {
+    return a + b;
+}
+
+wrap(calc)(process.argv)
+.then(function (ret) {
+    console.log(ret);
+});
+```
+
+```
+node ./wrap.js 3 4
+```
 
 ### As a npm scripts
 
@@ -95,75 +154,16 @@ npm run open
 
 ```
 
-### God Mode
-```
-//test.js
-module.exports = function(arg1, arg2) {
-    console.log(arg1, Array.isArray(arg1));
-    console.log(arg2);
-    console.log(this.arg3);
-    console.log(this.arg4);
-    return 'done';
-}
-```
-```
-fire ./test.js "1,2,3,4" hello --arg3 world --arg4 "the end"
-```
-The output:
+> More usage please checkout [tests](https://github.com/lwdgit/node-fire/tree/dev/test)
 
-```
-[ '1', '2', '3', '4' ] true
-hello
-world
-the end
-done
-```
+## Debug
 
-One more:
+> DEBUG=log fire xxx.js
 
-```
-//calc.js
-exports.add = function(a, b) {
-    return a + b;
-}
+## Contribution
 
-exports.multiply = function*(a, b) {
-    return a * b;
-}
-
-exports.pow = function(a) {
-    return a * a;
-}
-exports.div = function(a, b) {
-    b = b || this.b;
-    return a / b;
-}
-```
-
-```
-fire ./calc.js add 3 4                // 7
-fire ./calc.js multiply 3 4           // 12
-fire ./calc.js pow 3                  //9
-fire examples/calc.js div 8 0 --b=2   //4         
-```
-
-### As a wrapper
-```
-//wrap.js
-const { wrap } = require('node-fire');
-const calc = function(a, b) {
-    return a + b;
-}
-
-wrap(calc)(process.argv)
-.then(function (ret) {
-    console.log(ret);
-});
-```
-
-```
-node ./wrap.js 3 4
-```
+[Fork](https://github.com/lwdgit/node-fire#fork-destination-box)
+[Issues](https://github.com/lwdgit/node-fire/issues)
 
 ## LICENSE
 Under MIT license

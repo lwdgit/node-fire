@@ -1,41 +1,41 @@
 'use strict'
 const {
     join
-} = require('path');
+} = require('path')
 
-const {
-    patternRequire,
-} = require('./util');
-const wrap = require('./wrap');
+const lookup = require('./util/require')
+const wrap = require('./wrap')
+const log = require('./util/log')
 
-const debug = require('debug')('node-fire');
+function parse (argv, fn) {
+  log('input args', argv, fn)
+  try {
+    this.package = require(join(this.cwd, 'package.json'))
+  } catch (e) { }
 
-module.exports = function (argv) {
-    debug('input args', argv);
-    try {
-        this.package = require(join(this.cwd, 'package.json'))
-    } catch (e) {}
-
-    let script = argv._.shift();
+  if (!fn) {
+    let script = argv._.shift()
 
     if (!script) {
-        console.log(`Nothing to do! Please type "fire --help" view more info!`.yellow);
-        return;
+      console.log(`Nothing to do! Please type "fire --help" view more info!`.yellow)
+      return
     }
 
-    debug(' > loopup script:', script);
-    script = patternRequire(script);
+    log(' > loopup script:', script)
+    script = lookup(script)
 
     if (script == null) {
-        console.error('Not find a valid js/json file');
-        return;
+      console.error('Not find a valid js/json file')
+      return
     }
 
-    debug(`> RUN ${script}\n`);
+    log(`> RUN ${script}\n`)
 
-    debug(' > ha, got it', script);
+    fn = require(script)
+  }
 
-    let fn = require(script);
-    fn = wrap(fn);
-    return fn(argv);
+  fn = wrap(fn)
+  return fn(argv)
 }
+
+module.exports = parse

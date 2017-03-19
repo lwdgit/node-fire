@@ -1,13 +1,13 @@
 {
   "name": "node-fire",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Run a js object or a function by command line directly.",
   "bin": {
     "fire": "./bin/index.js"
   },
   "main": "index.js",
   "scripts": {
-    "test": "ava",
+    "test": "standard --fix && ava",
     "start": "node bin/index"
   },
   "dependencies": {
@@ -26,7 +26,8 @@
     "mathjs": "^3.9.3",
     "open": "^0.0.5",
     "pre-commit": "^1.2.2",
-    "shelljs": "^0.7.6"
+    "shelljs": "0.7.0",
+    "standard": "^9.0.2"
   },
   "repository": {
     "type": "git",

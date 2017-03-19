@@ -1,5 +1,5 @@
-const test = require('ava');
-const exec = require('./_exec');
+const test = require('ava')
+const exec = require('./_exec')
 test('calc', (t) => {
-    t.is(exec('test/fixtures/wrap.js add 3 4', 'node'), '7');
-});
+  t.is(exec('test/fixtures/wrap.js add 3 4', 'node'), '7')
+})
