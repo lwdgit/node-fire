@@ -21,7 +21,7 @@
 
 ## Known support list
 
-| node_modules | example |
+| node modules | example |
 | --- | --- |
 | [shelljs](https://github.com/shelljs/shelljs) | fire shelljs ls stdout |
 | [mathjs](https://github.com/josdejong/mathjs) | fire mathjs add 2.1 3.2 |
