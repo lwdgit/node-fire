@@ -1,5 +1,3 @@
-# FIRE LISt
-
 > node-fire just a runner for these node_modules without cli. 
 
 ## Examples
