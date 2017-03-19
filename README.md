@@ -19,10 +19,11 @@ $ fire ./test.js arg1 arg2 name=john
 ```bash
 > npm install md5
 > fire md5 test
-> npm install uui
+> npm install uuid
 > fire uuid
 > npm install open
 > fire open http://127.0.0.1
+...
 ```
 
 [More Example](./examples.md)
