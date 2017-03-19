@@ -29,6 +29,6 @@
 * [public-ip](https://github.com/sindresorhus/public-ip)  fire public-ip v4
 * [cpy](https://github.com/sindresorhus/cpy)  fire cpy ...1.html,2.html
 * [find-up](https://github.com/sindresorhus/find-up)  fire find-up 1.html
-* [md5] fire md5 test
-* [sha1] fire sha1 test
-* [uuid] fire uuid
+* md5 fire md5 test
+* sha1 fire sha1 test
+* uuid fire uuid
