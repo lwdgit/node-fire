@@ -14,39 +14,46 @@ $ fire ./test.js arg1 arg2
 ```
 ### Fire third party node_modules
 
-[Example](./examples.md)
+> npm install md5
+> fire md5 test
+> npm install uui
+> fire uuid
+> npm install open
+> fire open http://127.0.0.1
 
+[More Example](./examples.md)
 
 ### Fire remote js
-
 > curl https://raw.githubusercontent.com/lwdgit/node-fire/dev/examples/calc.js | fire add 1 2
 
 ### Fire local
-```
-//test.js
-module.exports = function(arg1, arg2) {
-    console.log(arg1, Array.isArray(arg1));
-    console.log(arg2);
-    console.log(this.arg3);
-    console.log(this.arg4);
-    return 'done';
-}
-```
-RUN
-```
-fire ./test.js "1,2,3,4" hello --arg3 world --arg4 "the end"
-```
-Output:
 
-```
-[ '1', '2', '3', '4' ] true
-hello
-world
-the end
-done
-```
+#### Test1 
+    ```
+    //test.js
+    module.exports = function(arg1, arg2) {
+        console.log(arg1, Array.isArray(arg1));
+        console.log(arg2);
+        console.log(this.arg3);
+        console.log(this.arg4);
+        return 'done';
+    }
+    ```
+    RUN
+    ```
+    fire ./test.js "1,2,3,4" hello --arg3 world --arg4 "the end"
+    ```
+    Output:
 
-Test2
+    ```
+    [ '1', '2', '3', '4' ] true
+    hello
+    world
+    the end
+    done
+    ```
+
+#### Test2
 
 ```javascript
 //test2.js
@@ -64,7 +71,7 @@ Output:
 hello world!
 ```
 
-One more:
+#### One more
 
 ```
 //calc.js
@@ -168,6 +175,7 @@ npm run open
 ## Contribution
 
 [Fork](https://github.com/lwdgit/node-fire#fork-destination-box)
+
 [Issues](https://github.com/lwdgit/node-fire/issues)
 
 ## LICENSE
