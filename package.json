@@ -1,6 +1,6 @@
 {
   "name": "node-fire",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Run a js object or a function by command line directly.",
   "bin": {
     "fire": "./bin/index.js"
@@ -18,7 +18,6 @@
     "debug": "^2.6.1",
     "rc": "^1.1.7",
     "resolve": "^1.3.2",
-    "xargs": "^1.1.3",
     "yargs": "^6.6.0"
   },
   "devDependencies": {

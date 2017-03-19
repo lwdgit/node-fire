@@ -23,6 +23,7 @@ const start = function () {
 
   silent = argv.silent
   return vm().then(function (ret) {
+    log(ret)
     return require('../index.js')(argv, ret)
   })
 }

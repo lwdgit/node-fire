@@ -59,10 +59,6 @@ function * execute (fn, args, opts) {
     fnLen = tmpArg.length
   }
 
-  // if (args.length < fnLen) {
-  //     concat(args, new Array(fnLen - args.length));
-  // }
-
   log('args', args)
 
   log(args.slice(0, fnLen))

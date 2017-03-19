@@ -16,7 +16,12 @@ $ fire ./test.js arg1 arg2
 
 [Example](./examples.md)
 
-### As a cli
+
+### Fire remote js
+
+> curl https://raw.githubusercontent.com/lwdgit/node-fire/dev/examples/calc.js | fire add 1 2
+
+### Fire local
 ```
 //test.js
 module.exports = function(arg1, arg2) {
@@ -105,7 +110,7 @@ wrap(calc)(process.argv)
 node ./wrap.js 3 4
 ```
 
-### As a npm scripts
+### As a npm scripts runner
 
 ```
 //package.json

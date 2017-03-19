@@ -1,22 +1,29 @@
-const { isTTY } = process.stdin
+const stdin = process.stdin
 
-const isPipe = !isTTY && 'start' in process.stdin
+const isPipe = !stdin.isTTY
 
 const check = function () {
   return new Promise(function (resolve) {
     if (isPipe) {
       const data = []
-      process.stdin.on('readable', function () {
+      // if not get readable data after 30s, give up
+      let tick = setTimeout(function () {
+        stdin.end && stdin.end()
+        resolve()
+      }, 30000)
+
+      stdin.on('readable', function () {
+        clearTimeout(tick)
         let chunk = ''
         while ((chunk = this.read(), chunk)) {
           data.push(chunk)
         }
       })
-      process.stdin.once('end', function () {
+      stdin.on('end', function () {
         resolve(run(data.join('')))
       })
     } else {
-      resolve(undefined)
+      resolve()
     }
   })
 }
