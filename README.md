@@ -1,6 +1,6 @@
 # node-fire
 
-> Run a js object, Promise, Generator or a function by command line directly.
+> Run a js object, Promise, Generator or a (async) function by command line directly.
 
 ## Install
 
