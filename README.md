@@ -14,7 +14,7 @@ $ npm install -g node-fire
 $ fire ./test.js arg1 arg2 name=john
 ```
 
-### Fire third party node_modules
+### Fire third party node modules
 
 ```bash
 > npm install md5
