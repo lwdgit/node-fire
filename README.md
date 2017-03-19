@@ -9,17 +9,21 @@ $ npm install -g node-fire
 ```
 
 ## How to use
+
 ```
-$ fire ./test.js arg1 arg2
+$ fire ./test.js arg1 arg2 name=john
 ```
+
 ### Fire third party node_modules
 
+```bash
 > npm install md5
 > fire md5 test
 > npm install uui
 > fire uuid
 > npm install open
 > fire open http://127.0.0.1
+```
 
 [More Example](./examples.md)
 
@@ -174,9 +178,9 @@ npm run open
 
 ## Contribution
 
-[Fork](https://github.com/lwdgit/node-fire#fork-destination-box)
+ [Fork](https://github.com/lwdgit/node-fire#fork-destination-box)
 
-[Issues](https://github.com/lwdgit/node-fire/issues)
+ [Issues](https://github.com/lwdgit/node-fire/issues)
 
 ## LICENSE
 Under MIT license
