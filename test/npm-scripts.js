@@ -2,10 +2,10 @@ const test = require('ava')
 const exec = require('./_exec')
 const testDir = 'quick_test' + Math.random()
 
-test('test2 with second param', (t) => {
-  let ret = exec(command, '')
+test('npm scripts', async (t) => {
+  let ret = await exec(command, '')
   t.regex(ret, new RegExp(testDir))
-  ret = exec(cleanCommand, '')
+  ret = await exec(cleanCommand, '')
   t.regex(ret, new RegExp('^((?!' + testDir + ')[\\w\\W])+$'), 'rm failed, you may delete it manualy')
   t.pass()
 })

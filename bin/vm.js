@@ -1,6 +1,6 @@
 const stdin = process.stdin
 
-const isPipe = !stdin.isTTY
+const isPipe = process.env.isPipe == null ? !stdin.isTTY : process.env.isPipe === 'true'
 
 const check = function () {
   return new Promise(function (resolve) {
