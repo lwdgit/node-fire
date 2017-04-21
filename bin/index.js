@@ -5,7 +5,7 @@ const parseArgs = require('../libs/parse-args')
 const { join } = require('path')
 const pkg = require(join(__dirname, '../package.json'))
 const vm = require('./vm')
-require('colors')
+const chalk = require('chalk')
 
 let silent = false
 
@@ -17,28 +17,21 @@ const start = function () {
   }
 
   if (argv.version) {
-    console.log(`\n${pkg.name} version: ${pkg.version}\n`.yellow)
-    return
+    return Promise.resolve(chalk.yellow(`\n${pkg.name} version: ${pkg.version}\n`))
   }
 
   silent = argv.silent
-  return vm().then(function (ret) {
+  return vm()
+  .then(function (ret) {
     log(ret)
     return require('../index.js')(argv, ret)
   })
 }
 
-const ret = start()
-if (ret != null) {
-  if (typeof ret === 'object' && ret.then) {
-    ret.then(function (ret) {
-      if (!silent) {
-        console.log(ret)
-      }
-    }).catch(function (e) {
-      console.error(e.red)
-    })
-  } else {
+start().then(function (ret) {
+  if (!silent) {
     console.log(ret)
   }
-}
+}).catch(function (e) {
+  console.error(chalk.red(e.message), '\n', e)
+})

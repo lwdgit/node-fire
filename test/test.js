@@ -14,3 +14,8 @@ test('exec2', async (t) => {
   t.is(await exec('./examples/test2.js hello name=world !'), 'hello world!')
   t.pass()
 })
+
+test('should catch error', async t => {
+  const ret = await exec('./test/fixtures/error.js')
+  t.is(ret, '')
+})

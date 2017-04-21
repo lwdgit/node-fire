@@ -1,5 +1,11 @@
 const callerId = require('caller-id')
+const chalk = require('chalk')
 module.exports = process.env.DEBUG === 'log' ? function (...args) {
   let data = callerId.getData()
-  console.log(`${data.filePath} > ${data.functionName}:${data.lineNumber}`.blue, '\n', ...args, '\n----------------'.blue)
+  console.log(
+    chalk.blue(`${data.filePath} > ${data.functionName}:${data.lineNumber}`),
+    '\n',
+    ...args,
+    chalk.blue('\n----------------')
+  )
 } : function () {}

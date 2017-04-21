@@ -1,6 +1,6 @@
 {
   "name": "node-fire",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Run a js object or a function by command line directly.",
   "bin": {
     "fire": "./bin/index.js"
@@ -10,11 +10,14 @@
     "test": "standard --fix && ava",
     "start": "node bin/index"
   },
+  "standard": {
+    "ignore": ["test/fixtures/error.js"]
+  },
   "dependencies": {
     "bluebird": "^3.4.7",
     "caller-id": "^0.1.0",
+    "chalk": "^1.1.3",
     "co": "^4.6.0",
-    "colors": "^1.1.2",
     "debug": "^2.6.1",
     "rc": "^1.1.7",
     "resolve": "^1.3.2",
